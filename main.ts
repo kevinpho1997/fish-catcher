@@ -10,6 +10,17 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         info.changeScoreBy(500)
     }
 })
+/**
+ * on b button press
+ * 
+ * make a big net, you get 1 net every x score
+ * 
+ * make a timer for the game, say 60 seconds
+ * 
+ * add music
+ * 
+ * add sound effects?
+ */
 let enemySprite: Sprite = null
 let projectile: Sprite = null
 let boat: Sprite = null
