@@ -14,8 +14,13 @@
 // 
 // Could make big net pierce - might be too much code
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (bigNet > 1) {
+    if (bigNet >= 1) {
         projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 75)
+        bigNet += -1
+        boat.sayText("Big nets left:" + bigNet, 1500, false)
+        pause(1000)
+    } else {
+        boat.sayText("No big nets", 1000, false)
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -27,12 +32,12 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         // shark collision
         info.changeScoreBy(1000)
         bigNet += 1
-        boat.sayText("BIG WIN!")
+        boat.sayText("BIG WIN!", 1000, false)
     } else {
         // If the enemy is at the bottom = more score
         // +
         // not shark
-        if (enemySprite.y >= 110) {
+        if (enemySprite.y <= 110) {
             info.changeScoreBy(100)
         } else {
             info.changeScoreBy(500)
