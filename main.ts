@@ -15,9 +15,8 @@
 // Could make big net pierce - might be too much code
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (bigNet >= 1) {
-        projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 75)
+        projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 100)
         bigNet += -1
-        boat.sayText("Big nets left:" + bigNet, 1500, false)
         pause(1000)
     } else {
         boat.sayText("No big nets", 1000, false)
@@ -33,6 +32,8 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         info.changeScoreBy(1000)
         bigNet += 1
         boat.sayText("BIG WIN!", 1000, false)
+        pause(1000)
+        boat.sayText("Big nets left:" + bigNet, 1500, false)
     } else {
         // If the enemy is at the bottom = more score
         // +
