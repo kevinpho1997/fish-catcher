@@ -6,18 +6,23 @@
 // 
 // Could make big net pierce - might be too much code
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (bigNet >= 1) {
-        projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 100)
-        bigNet += -1
-        pause(1000)
-    } else {
-        boat.sayText("No big nets", 1000, false)
+    if (game.runtime() - castCooldown >= 500) {
+        castCooldown = game.runtime()
+        if (bigNet >= 1) {
+            projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 100)
+            music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.UntilDone)
+            bigNet += -1
+            pause(500)
+        } else {
+            boat.sayText("No big nets", 1000, false)
+        }
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
-    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-    pause(500)
+    if (game.runtime() - castCooldown >= 500) {
+        castCooldown = game.runtime()
+        projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
+    }
 })
 info.onCountdownEnd(function () {
     game.showLongText("Nice fishing! Your score was: " + info.score() + ". \\n Your High Score is: " + info.highScore(), DialogLayout.Center)
@@ -45,13 +50,14 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
 })
 let enemySprite: Sprite = null
 let projectile: Sprite = null
+let castCooldown = 0
 let enemyList: Image[] = []
 let bigNet = 0
 let boat: Sprite = null
 scene.setBackgroundImage(assets.image`Backdrop`)
 boat = sprites.create(assets.image`PlayerSprite`, SpriteKind.Player)
 bigNet = 0
-controller.moveSprite(boat, 100, 0)
+controller.moveSprite(boat, 65, 0)
 boat.setPosition(78, 25)
 enemyList = [
 assets.image`f1`,
@@ -62,6 +68,7 @@ assets.image`f4`,
 assets.image`shark`
 ]
 info.startCountdown(60)
+castCooldown = -500
 forever(function () {
     music.setVolume(50)
     music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.UntilDone)
