@@ -1,5 +1,3 @@
-// make a timer for the game, say 60 seconds
-// 
 // add music
 // 
 // add sound effects?
@@ -23,7 +21,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(500)
 })
 info.onCountdownEnd(function () {
-    game.showLongText("Nice fishing! Your score was: " + info.score() + ". Your High Score is: " + info.highScore(), DialogLayout.Center)
+    game.showLongText("Nice fishing! Your score was: " + info.score() + ". \\n Your High Score is: " + info.highScore(), DialogLayout.Center)
+    game.reset()
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (otherSprite.image == enemyList[5]) {
