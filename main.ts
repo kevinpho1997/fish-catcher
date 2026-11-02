@@ -31,9 +31,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         // shark collision
         info.changeScoreBy(1000)
         bigNet += 1
-        boat.sayText("BIG WIN!", 1000, false)
-        pause(1000)
-        boat.sayText("Big nets left:" + bigNet, 1500, false)
+        boat.sayText("W! " + "Big nets:" + bigNet, 1500, false)
     } else {
         // If the enemy is at the bottom = more score
         // +
@@ -57,7 +55,7 @@ scene.setBackgroundImage(assets.image`Backdrop`)
 boat = sprites.create(assets.image`PlayerSprite`, SpriteKind.Player)
 bigNet = 0
 controller.moveSprite(boat, 100, 0)
-boat.setPosition(78, 18)
+boat.setPosition(78, 25)
 enemyList = [
 assets.image`f1`,
 assets.image`f2`,
@@ -68,6 +66,6 @@ assets.image`shark`
 ]
 game.onUpdateInterval(500, function () {
     enemySprite = sprites.create(enemyList[randint(0, 5)], SpriteKind.Enemy)
-    enemySprite.setPosition(162, randint(25, 115))
+    enemySprite.setPosition(162, randint(35, 115))
     enemySprite.setVelocity(randint(-40, -60), 0)
 })
