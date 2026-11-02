@@ -1,5 +1,3 @@
-// add music
-// 
 // add sound effects?
 // 
 // give different score depending on type of fish caught
@@ -18,6 +16,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
+    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
     pause(500)
 })
 info.onCountdownEnd(function () {
@@ -62,7 +61,11 @@ assets.image`f5`,
 assets.image`f4`,
 assets.image`shark`
 ]
-info.startCountdown(3)
+info.startCountdown(60)
+forever(function () {
+    music.setVolume(50)
+    music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.UntilDone)
+})
 game.onUpdateInterval(500, function () {
     enemySprite = sprites.create(enemyList[randint(0, 5)], SpriteKind.Enemy)
     enemySprite.setPosition(162, randint(35, 115))
