@@ -1,7 +1,3 @@
-// on b button press
-// 
-// make a big net, you get 1 net every x score
-// 
 // make a timer for the game, say 60 seconds
 // 
 // add music
@@ -25,6 +21,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
     pause(500)
+})
+info.onCountdownEnd(function () {
+    game.showLongText("Nice fishing! Your score was: " + info.score() + ". Your High Score is: " + info.highScore(), DialogLayout.Center)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (otherSprite.image == enemyList[5]) {
@@ -64,6 +63,7 @@ assets.image`f5`,
 assets.image`f4`,
 assets.image`shark`
 ]
+info.startCountdown(3)
 game.onUpdateInterval(500, function () {
     enemySprite = sprites.create(enemyList[randint(0, 5)], SpriteKind.Enemy)
     enemySprite.setPosition(162, randint(35, 115))
