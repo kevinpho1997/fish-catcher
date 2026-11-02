@@ -1,4 +1,4 @@
-// add sound effects?
+// add sound effects? they are kinda scuffed
 // 
 // give different score depending on type of fish caught
 // 
@@ -38,7 +38,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         // If the enemy is at the bottom = more score
         // +
         // not shark
-        if (enemySprite.y <= 110) {
+        if (otherSprite.y <= 110) {
             info.changeScoreBy(100)
         } else {
             info.changeScoreBy(500)
