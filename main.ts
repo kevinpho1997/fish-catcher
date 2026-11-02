@@ -6,20 +6,19 @@
 // 
 // Could make big net pierce - might be too much code
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (game.runtime() - castCooldown >= 500) {
+    if (game.runtime() - castCooldown >= castCooldown * -1) {
         castCooldown = game.runtime()
         if (bigNet >= 1) {
             projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 100)
             music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.UntilDone)
             bigNet += -1
-            pause(500)
         } else {
             boat.sayText("No big nets", 1000, false)
         }
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (game.runtime() - castCooldown >= 500) {
+    if (game.runtime() - castCooldown >= castCooldown * -1) {
         castCooldown = game.runtime()
         projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
     }
