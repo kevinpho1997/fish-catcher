@@ -42,6 +42,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         } else {
             info.changeScoreBy(500)
             bigNet += 1
+            boat.sayText("W! " + "Big nets:" + bigNet, 1500, false)
         }
     }
     otherSprite.destroy(effects.bubbles, 100)
