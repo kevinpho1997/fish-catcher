@@ -6,8 +6,8 @@
 // 
 // Could make big net pierce - might be too much code
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (game.runtime() - castCooldown >= castCooldown * -1) {
-        castCooldown = game.runtime()
+    if (game.runtime() - lastCast >= 500) {
+        lastCast = game.runtime()
         if (bigNet >= 1) {
             projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 100)
             music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.UntilDone)
@@ -18,8 +18,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (game.runtime() - castCooldown >= castCooldown * -1) {
-        castCooldown = game.runtime()
+    if (game.runtime() - lastCast >= 1000) {
+        lastCast = game.runtime()
         projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
     }
 })
@@ -49,7 +49,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
 })
 let enemySprite: Sprite = null
 let projectile: Sprite = null
-let castCooldown = 0
+let lastCast = 0
 let enemyList: Image[] = []
 let bigNet = 0
 let boat: Sprite = null
@@ -67,7 +67,7 @@ assets.image`f4`,
 assets.image`shark`
 ]
 info.startCountdown(60)
-castCooldown = -500
+lastCast = -1000
 forever(function () {
     music.setVolume(50)
     music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.UntilDone)
