@@ -6,11 +6,11 @@
 // 
 // Could make big net pierce - might be too much code
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (game.runtime() - lastCast >= 500) {
+    if (game.runtime() - lastCast >= 1000) {
         lastCast = game.runtime()
         if (bigNet >= 1) {
             projectile = sprites.createProjectileFromSprite(assets.image`bigNet`, boat, 0, 100)
-            music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.UntilDone)
+            music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.InBackground)
             bigNet += -1
         } else {
             boat.sayText("No big nets", 1000, false)
