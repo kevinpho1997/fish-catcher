@@ -21,6 +21,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (game.runtime() - lastCast >= 1000) {
         lastCast = game.runtime()
         projectile = sprites.createProjectileFromSprite(assets.image`net`, boat, 0, 50)
+        music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.InBackground)
     }
 })
 info.onCountdownEnd(function () {
@@ -69,10 +70,8 @@ assets.image`shark`
 ]
 info.startCountdown(60)
 lastCast = -1000
-forever(function () {
-    music.setVolume(50)
-    music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.UntilDone)
-})
+music.setVolume(35)
+music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.LoopingInBackground)
 game.onUpdateInterval(500, function () {
     enemySprite = sprites.create(enemyList[randint(0, 5)], SpriteKind.Enemy)
     enemySprite.setPosition(162, randint(35, 115))
