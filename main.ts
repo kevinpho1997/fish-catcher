@@ -68,8 +68,8 @@ assets.image`f5`,
 assets.image`f4`,
 assets.image`shark`
 ]
-info.startCountdown(60)
 lastCast = -1000
+info.startCountdown(60)
 music.setVolume(35)
 music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.LoopingInBackground)
 game.onUpdateInterval(500, function () {
