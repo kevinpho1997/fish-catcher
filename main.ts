@@ -26,7 +26,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 info.onCountdownEnd(function () {
     game.showLongText("Nice fishing! Your score was: " + info.score() + ". \\n Your High Score is: " + info.highScore(), DialogLayout.Center)
-    game.reset()
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (otherSprite.image == enemyList[5]) {
@@ -69,7 +68,8 @@ assets.image`f4`,
 assets.image`shark`
 ]
 lastCast = -1000
-info.startCountdown(60)
+info.setScore(0)
+info.startCountdown(10)
 music.setVolume(35)
 music.play(music.createSong(assets.song`inGameMusic`), music.PlaybackMode.LoopingInBackground)
 game.onUpdateInterval(500, function () {
